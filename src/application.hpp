@@ -14,6 +14,7 @@ namespace Amigo {
 
             protected:
                 virtual int execute();
+                virtual int help();
 
             protected:
                 Application();
