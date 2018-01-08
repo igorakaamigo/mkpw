@@ -24,28 +24,14 @@
 
 #pragma once
 
-#include <vector>
 #include <string>
-#include <boost/program_options.hpp>
-#include "generator.hpp"
 
 namespace Amigo {
     namespace Utils {
         namespace Mkpw {
-            class Application {
+            class Generator {
             public:
-                Application(std::shared_ptr<Generator>);
-                int main(int argc, char *argv[]);
-
-            protected:
-                virtual int main(std::vector<std::string>);
-                void parseCommandLine(std::vector<std::string>);
-
-            protected:
-                boost::program_options::options_description _options;
-                boost::program_options::variables_map _variables;
-                int _passwordLength;
-                std::shared_ptr<Generator> _generator;
+                virtual std::string generate(int);
             };
         }
     }

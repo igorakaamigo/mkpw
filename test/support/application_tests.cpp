@@ -22,31 +22,36 @@
  * SOFTWARE.
  */
 
-#pragma once
-
-#include <vector>
-#include <string>
-#include <boost/program_options.hpp>
-#include "generator.hpp"
+#include "application_tests.hpp"
 
 namespace Amigo {
     namespace Utils {
         namespace Mkpw {
-            class Application {
-            public:
-                Application(std::shared_ptr<Generator>);
-                int main(int argc, char *argv[]);
+            namespace Test {
+                MockApplication::MockApplication(std::shared_ptr<Generator> g) : Application(g) {}
 
-            protected:
-                virtual int main(std::vector<std::string>);
-                void parseCommandLine(std::vector<std::string>);
+                int MockApplication::main(int argc, char *argv[]) {
+                    return Application::main(argc, argv);
+                }
 
-            protected:
-                boost::program_options::options_description _options;
-                boost::program_options::variables_map _variables;
-                int _passwordLength;
-                std::shared_ptr<Generator> _generator;
-            };
+                int MockApplication::applicationMain(std::vector<std::string> args) {
+                    return Application::main(args);
+                }
+
+                void ApplicationTests::SetUp() {
+                    _generator = std::make_shared<MockGenerator>();
+                    _application = std::make_shared<MockApplication>(_generator);
+                    _output = std::make_shared<std::stringstream>();
+                    __prevStream = std::cout.rdbuf(_output->rdbuf());
+                }
+
+                void ApplicationTests::TearDown() {
+                    std::cout.rdbuf(__prevStream);
+                    _output = NULL;
+                    _application = NULL;
+                    _generator = NULL;
+                }
+            }
         }
     }
 }
