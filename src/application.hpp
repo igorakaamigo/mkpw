@@ -3,23 +3,27 @@
 #include <vector>
 #include <string>
 
-namespace Amigo::Utils::Mkpw {
-    class Application {
-    public:
-        static Application &instance();
+namespace Amigo {
+    namespace Utils {
+        namespace Mkpw {
+            class Application {
+            public:
+                static Application &instance();
 
-        int main(std::vector<std::string>);
+                int main(std::vector<std::string>);
 
-    protected:
-        virtual int execute();
+            protected:
+                virtual int execute();
 
-    protected:
-        Application();
+            protected:
+                Application();
 
-        Application(const Application &);
+                Application(const Application &);
 
-        ~Application();
+                ~Application();
 
-        Application &operator=(const Application &);
-    };
+                Application &operator=(const Application &);
+            };
+        }
+    }
 }
