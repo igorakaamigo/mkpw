@@ -1,0 +1,16 @@
+language: cpp
+
+compiler:
+- clang
+- gcc
+
+os:
+- linux
+- osx
+
+script:
+  - sh scripts/test.sh
+  - sh scripts/build.sh
+
+notifications:
+  email: false
