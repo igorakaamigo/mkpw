@@ -32,8 +32,8 @@ HunterGate(
 
 project(mkpw-test)
 
-hunter_add_package(Boost COMPONENTS program_options)
-find_package(Boost CONFIG REQUIRED COMPONENTS program_options)
+hunter_add_package(Boost COMPONENTS program_options random)
+find_package(Boost CONFIG REQUIRED COMPONENTS program_options system random)
 
 hunter_add_package(GTest)
 find_package(GMock CONFIG REQUIRED)
@@ -46,12 +46,17 @@ add_executable(
         ../src/generator.cpp
         support/application_tests.hpp
         support/application_tests.cpp
+        support/generator_tests.hpp
+        support/generator_tests.cpp
         application_tests.cpp
+        generator_tests.cpp
 )
 
 target_link_libraries(
         ${CMAKE_PROJECT_NAME}
         PRIVATE
         Boost::program_options
+        Boost::system
+        Boost::random
         GMock::main
 )

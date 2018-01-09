@@ -22,29 +22,21 @@
  * SOFTWARE.
  */
 
-#include <boost/random/random_device.hpp>
-#include <boost/random/uniform_int_distribution.hpp>
-#include "generator.hpp"
+#include "support/generator_tests.hpp"
 
 namespace Amigo {
     namespace Utils {
         namespace Mkpw {
-            std::string Generator::generate(int length) {
-                namespace br = boost::random;
-
-                static std::string alphabet = "abcdefghijklmnopqrstuvwxyz"
-                                              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                              "0123456789";
-
-                br::random_device rd;
-                br::uniform_int_distribution<> random_index(0, alphabet.size() - 1);
-                std::string result;
-
-                for (auto i = 0; i < length; ++i) {
-                    result.push_back(alphabet[random_index(rd)]);
+            namespace Test {
+                TEST_F(GeneratorTests, ItsGenerateMethodShouldReturnAStringWithASuppliedLength) {
+                    ASSERT_EQ(20, _generator->generate(20).size());
                 }
 
-                return result;
+                TEST_F(GeneratorTests, ItsGenerateMethodShouldReturnUniqueStrings) {
+                    std::string a = _generator->generate(12);
+                    std::string b = _generator->generate(12);
+                    ASSERT_FALSE(a == b);
+                }
             }
         }
     }
