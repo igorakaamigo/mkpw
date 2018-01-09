@@ -24,29 +24,44 @@
 
 #pragma once
 
-#include <vector>
-#include <string>
-#include <boost/program_options.hpp>
-#include "generator.hpp"
+#include <gmock/gmock.h>
+#include "../../src/application.hpp"
+#include "../../src/generator.hpp"
 
 namespace Amigo {
     namespace Utils {
         namespace Mkpw {
-            class Application {
-            public:
-                Application(std::shared_ptr<Generator>);
-                int main(int argc, char *argv[]);
+            namespace Test {
+                class MockGenerator : public Generator {
+                public:
+                    MOCK_METHOD1(generate, std::string(int length));
+                };
 
-            protected:
-                virtual int main(std::vector<std::string>);
-                void parseCommandLine(std::vector<std::string>);
+                class MockApplication : public Application {
+                public:
+                    MockApplication(std::shared_ptr<Generator>);
 
-            protected:
-                boost::program_options::options_description _options;
-                boost::program_options::variables_map _variables;
-                int _passwordLength;
-                std::shared_ptr<Generator> _generator;
-            };
+                    int main(int argc, char *argv[]);
+
+                    int applicationMain(std::vector<std::string> args);
+
+                    MOCK_METHOD1(main, int(std::vector<std::string> arguments));
+                };
+
+                class ApplicationTests : public ::testing::Test {
+                protected:
+                    virtual void SetUp();
+                    virtual void TearDown();
+
+                protected:
+                    std::shared_ptr<MockApplication> _application;
+                    std::shared_ptr<MockGenerator> _generator;
+                    std::shared_ptr<std::stringstream> _output;
+
+                private:
+                    std::streambuf* __prevStream;
+                };
+            }
         }
     }
 }
