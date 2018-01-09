@@ -26,6 +26,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include <boost/program_options.hpp>
 #include "generator.hpp"
 

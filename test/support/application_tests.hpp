@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <memory>
 #include <gmock/gmock.h>
 #include "../../src/application.hpp"
 #include "../../src/generator.hpp"
