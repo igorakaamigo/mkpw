@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.1.0] - 2018-01-09
 ### Added
 - MIT license file
 - Changelog file
@@ -14,4 +16,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Build scripts
 - Travis CI setup
 - AppVeyor CI setup
-- Dummy tests & application code
+- Simple implementation and testing

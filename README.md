@@ -10,14 +10,60 @@ I'll be happy if you find this utility useful.
 
 ## Features
 
-* I should write something here
+A simple command-line utility mkpwd allows you to generate a random password with a specified length. 
 
-## Installation
+## Building
 
-And here
+### Verified OS & compiler support
+- macOS Sierra 10.12 (x86_64-apple-darwin16.7.0), Apple LLVM version 8.1.0 (clang-802.0.42, Xcode 8.3.3)
+- macOS Sierra 10.12 (x86_64-apple-darwin16.7.0), GCC 4.2.1
+- Ubuntu 14.04 LTS, clang version 5.0.0
+- Ubuntu 14.04 LTS, gcc 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3)
+- Win x86, Visual Studio 14 2015
+- Win x64, Visual Studio 14 2015
+
+### macOS and other unix-like OSes
+```sh
+$ git clone git@github.com:igorakaamigo/mkpw.git
+$ cd mkpw
+$ sh scripts/build.sh
+$ build/_release/mkpw --help
+```
+
+### Win
+```cmd
+$ git clone git@github.com:igorakaamigo/mkpw.git
+$ cd mkpw
+$ call scripts/build.cmd
+$ build\_release\mkpw --help
+```
+
+## Usage
+- Generate a new password with a default length value (eight characters):
+```sh
+$ mkpw
+```
+
+- Brief usage help:
+```sh
+$ mkpw --help
+$ mkpw -H
+```
+
+- Print version info:
+```sh
+$ mkpw --version
+$ mkpw -V
+```
+
+- Generate a new password and specify the password' length:
+```sh
+$ mkpw --length=10
+$ mkpw --length 10
+$ mkpw -L10
+```
 
 ## Contributing
-
-OMG! Really? Thanks a lot!
+I doubt one can be interested in contribution to a mkpw project, but if you are interested –
 
 Fork --> modify --> pull-request
